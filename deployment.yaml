@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grade-submission-api
+  name: new-jp-api
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grade-submission-api
+      app: new-jp-api
   template:
     metadata:
       labels:
-        app: grade-submission-api
+        app: new-jp-api
     spec:
       imagePullSecrets:
       - name: ghcr-secret
@@ -19,7 +19,7 @@ spec:
       - name: grade-submission-api
         image: ghcr.io/codeicu120/new-jp:1147a383300d888775b231a5f2c4dc4f018d
         ports:
-        - containerPort: 3000
+        - containerPort: 8002
         resources:
           limits:
             memory: "256Mi"
@@ -31,12 +31,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: grade-submission-api
+  name: new-jp-api
   namespace: default
 spec:
   selector:
-    app: grade-submission-api
+    app: new-jp-api
   ports:
-  - port: 80
-    targetPort: 3000
+  - port: 8002
+    targetPort: 8002
   type: ClusterIP
