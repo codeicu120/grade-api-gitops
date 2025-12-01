@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: new-jp-api
-  namespace: default
+  namespace: jpapi
 spec:
   replicas: 1
   selector:
