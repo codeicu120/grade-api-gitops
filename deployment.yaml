@@ -14,19 +14,27 @@ spec:
         app: new-jp-api
     spec:
       imagePullSecrets:
-      - name: ghcr-secret
+        - name: ghcr-secret
       containers:
-      - name: grade-submission-api
-        image: ghcr.io/codeicu120/new-jp:5812a0fad36440ea457095fd96b4bcdbefb0db0b
-        ports:
-        - containerPort: 8002
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
+        - name: grade-submission-api
+          image: ghcr.io/codeicu120/new-jp:5812a0fad36440ea457095fd96b4bcdbefb0db0b
+          ports:
+            - containerPort: 8002
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config/config.yaml
+              subPath: config.yaml
+      volumes:
+        - name: app-config
+          configMap:
+            name: new-jp-config
 ---
 apiVersion: v1
 kind: Service
@@ -37,6 +45,6 @@ spec:
   selector:
     app: new-jp-api
   ports:
-  - port: 8002
-    targetPort: 8002
+    - port: 8002
+      targetPort: 8002
   type: ClusterIP
