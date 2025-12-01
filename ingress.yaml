@@ -11,7 +11,7 @@ spec:
     - host: knewjp.ipixiv.com   # 换成你的域名
       http:
         paths:
-          - path: /
+          - path: /api/v2
             pathType: Prefix
             backend:
               service:
