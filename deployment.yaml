@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: grade-submission-api
-          image: ghcr.io/codeicu120/new-jp:5812a0fad36440ea457095fd96b4bcdbefb0db0b
+          image: ghcr.io/codeicu120/new-jp:56356b7ca9baa0a8a3d9082f40955bd6043c917e
           ports:
             - containerPort: 8002
           resources:
